@@ -30,3 +30,7 @@ export const WEB_SITES: WebSite[] = [
 export const USER_ID = 'music468';
 
 export const USER_PASSWORD = 'Tjdgns9812@';
+
+export const VACANCY_KEYWORDS = ['공실', '신규', '추가', '모집'];
+
+export const VACANCY_EXCLUDE_KEYWORDS = ['P.T', '필라테스', '소독'];

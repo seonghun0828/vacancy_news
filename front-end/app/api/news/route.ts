@@ -1,4 +1,10 @@
-import { USER_ID, USER_PASSWORD, WEB_SITES } from '@/app/constants';
+import {
+  USER_ID,
+  USER_PASSWORD,
+  VACANCY_EXCLUDE_KEYWORDS,
+  VACANCY_KEYWORDS,
+  WEB_SITES,
+} from '@/app/constants';
 import { NextResponse } from 'next/server';
 import puppeteer from 'puppeteer';
 
@@ -33,9 +39,24 @@ export async function GET() {
         await page.goto(url, { waitUntil: 'networkidle0' });
       }
 
-      const content = await page.content();
+      // 페이지에서 anchor 요소 추출
+      const anchorElements = await page.evaluate(() =>
+        Array.from(document.querySelectorAll('td a, li a'))
+          .filter(
+            (anchor) => !anchor.closest('header') && !anchor.closest('nav')
+          )
+          .map((anchor) => anchor.textContent?.trim())
+      );
 
-      return { name, url, content };
+      // 페이지에서 원하는 키워드 포함한 텍스트 추출
+      const newsItems = anchorElements.filter(
+        (text) =>
+          text &&
+          VACANCY_KEYWORDS.some((keyword) => text.includes(keyword)) &&
+          !VACANCY_EXCLUDE_KEYWORDS.some((keyword) => text.includes(keyword))
+      );
+
+      return { name, url, news: newsItems };
     })
   );
 

@@ -7,13 +7,17 @@ export default async function Home() {
 
   return (
     <div>
-      {data.map(({ name, url }) => (
+      {data.map(({ name, url, news }) => (
         <div key={name}>
-          <h1>{name}</h1>
-          <a href={url} target="_blank">
-            {url}
+          <a href={url} target='_blank'>
+            <h3>{name}</h3>
           </a>
-          <div>content</div>
+
+          <ul>
+            {news?.slice(0, 5).map((text, idx) => (
+              <li key={text + idx}>{text}</li>
+            ))}
+          </ul>
         </div>
       ))}
     </div>

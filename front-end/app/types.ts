@@ -4,5 +4,5 @@ export type WebSite = {
 };
 
 export type WebsiteContent = WebSite & {
-  content: string;
+  news: string[];
 };
