@@ -1,6 +1,4 @@
 import {
-  USER_ID,
-  USER_PASSWORD,
   VACANCY_EXCLUDE_KEYWORDS,
   VACANCY_KEYWORDS,
   WEB_SITES,
@@ -10,7 +8,7 @@ import puppeteer from 'puppeteer';
 
 export async function GET() {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     defaultViewport: { width: 1920, height: 1080 },
   });
   const websiteContents = await Promise.all(
@@ -47,7 +45,9 @@ export async function GET() {
 
       // 페이지에서 anchor 요소 추출
       const anchorElements = await page.evaluate(() =>
-        Array.from(document.querySelectorAll('td a, li a'))
+        Array.from(
+          document.querySelectorAll('td a, li a, div.modal-container span')
+        )
           .filter(
             (anchor) => !anchor.closest('header') && !anchor.closest('nav')
           )
