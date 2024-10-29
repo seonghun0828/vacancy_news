@@ -29,8 +29,14 @@ export async function GET() {
           page.waitForSelector("input[name='member_password']"),
         ]);
 
-        await page.type('input[name="member_id"]', USER_ID);
-        await page.type('input[name="member_password"]', USER_PASSWORD);
+        await page.type(
+          'input[name="member_id"]',
+          process.env.NEXT_PUBLIC_USER_ID ?? ''
+        );
+        await page.type(
+          'input[name="member_password"]',
+          process.env.NEXT_PUBLIC_USER_PASSWORD ?? ''
+        );
 
         await page.keyboard.press('Enter');
 
