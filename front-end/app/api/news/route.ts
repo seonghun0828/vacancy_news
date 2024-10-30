@@ -45,9 +45,7 @@ export async function GET() {
 
       // 페이지에서 anchor 요소 추출
       const anchorElements = await page.evaluate(() =>
-        Array.from(
-          document.querySelectorAll('td a, li a, div.modal-container span')
-        )
+        Array.from(document.querySelectorAll('a, div.modal-container span'))
           .filter(
             (anchor) => !anchor.closest('header') && !anchor.closest('nav')
           )
