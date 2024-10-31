@@ -2,7 +2,7 @@ import { WebsiteContent } from './types';
 
 export default async function Home() {
   const { data }: { data: WebsiteContent[] } = await fetch(
-    'http://localhost:3000/api/news'
+    'http://localhost:3001/news'
   ).then((res) => res.json());
 
   return (
