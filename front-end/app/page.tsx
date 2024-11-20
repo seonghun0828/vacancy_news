@@ -9,7 +9,7 @@ export default async function Home() {
     <div>
       {data.map(({ name, url, news }) => (
         <div key={name}>
-          <a href={url} target='_blank'>
+          <a href={url} target="_blank">
             <h3>{name}</h3>
           </a>
 
